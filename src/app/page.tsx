@@ -1,11 +1,16 @@
 import Hero from "@/components/Hero";
 import ProductListing from "@/components/ProductListing";
+import { getProducts } from "@/lib/products";
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const products = await getProducts();
+
   return (
     <main className="bg-base min-h-screen">
       <Hero />
-      <ProductListing />
+      <ProductListing products={products} />
     </main>
   );
 }

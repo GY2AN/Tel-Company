@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Fraunces, Inter } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
 import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -31,11 +32,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fraunces.variable} ${inter.variable} font-sans`}>
-        <CartProvider>
-          <Header />
-          {children}
-          <Footer />
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <Header />
+            {children}
+            <Footer />
+          </CartProvider>
+        </AuthProvider>
         <Toaster
           position="bottom-center"
           toastOptions={{

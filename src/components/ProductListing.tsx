@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { products } from "@/data/products";
+import { Product } from "@/data/products";
 import ProductCard from "./ProductCard";
 
-export default function ProductListing() {
+export default function ProductListing({ products }: { products: Product[] }) {
   const [query, setQuery] = useState("");
 
   const filtered = products.filter((product) => {

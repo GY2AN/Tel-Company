@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Header() {
   const { items } = useCart();
+  const { user, loading, signOut } = useAuth();
   const itemCount = items.reduce((sum, i) => sum + i.quantity, 0);
 
   return (
@@ -20,6 +22,16 @@ export default function Header() {
           <Link href="/cart" className="hover:text-teal">
             Cart ({itemCount})
           </Link>
+          {!loading &&
+            (user ? (
+              <button onClick={signOut} className="hover:text-teal">
+                Logout
+              </button>
+            ) : (
+              <Link href="/login" className="hover:text-teal">
+                Login
+              </Link>
+            ))}
         </nav>
       </div>
     </header>
